@@ -2,7 +2,6 @@ package com.devsuperior.dscommerce.controllers;
 
 import com.devsuperior.dscommerce.dto.ProductDTO;
 import com.devsuperior.dscommerce.services.ProductService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
