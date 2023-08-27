@@ -80,6 +80,10 @@ public class Order {
         return items.stream().map(x -> x.getProduct()).toList();
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
