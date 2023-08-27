@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDate;
 import java.util.*;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_user")
 public class User implements UserDetails {
