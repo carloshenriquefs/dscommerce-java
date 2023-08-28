@@ -5,6 +5,11 @@
 
 ##
 
+## :clipboard: - Diagrama:
+
+![dscommerce drawio](https://github.com/carloshenriquefs/dscommerce-java/assets/54969405/244d212b-dcba-4d19-9442-431cb4994b21)
+
+##
 
 ## :gear: - Endpoints:
 
@@ -37,7 +42,7 @@
 
 ##
 
-### :heavy_check_mark: - Critérios:
+### :white_check_mark: - Critérios:
 
 - [x] - Endpoints públicos GET /produts e GET /products/{id} funcionam sem necessidade de login;
 - [x] - Endpoint de login funcionando e retornando o token de acesso;
