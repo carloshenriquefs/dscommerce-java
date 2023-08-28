@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.devsuperior.dscommerce.constants.Constants.EMAIL_NOT_FOUND;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -29,7 +31,7 @@ public class UserService implements UserDetailsService {
         List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
 
         if (result.size() == 0) {
-            throw new UsernameNotFoundException("Email not found");
+            throw new UsernameNotFoundException(EMAIL_NOT_FOUND);
         }
 
         User user = new User();
@@ -49,7 +51,7 @@ public class UserService implements UserDetailsService {
             String username = jwtPrincipal.getClaim("username");
             return repository.findByEmail(username).get();
         } catch (Exception e) {
-            throw new UsernameNotFoundException("Email not found");
+            throw new UsernameNotFoundException(EMAIL_NOT_FOUND);
         }
     }
 

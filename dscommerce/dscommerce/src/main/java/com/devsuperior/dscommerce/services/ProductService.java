@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.devsuperior.dscommerce.constants.Constants.RECURSO_NAO_ENCONTRADO;
+
 @Service
 public class ProductService {
 
@@ -27,7 +29,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Recurso não encontrado"));
+                () -> new ResourceNotFoundException(RECURSO_NAO_ENCONTRADO));
         return new ProductDTO(product);
     }
 
