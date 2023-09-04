@@ -7,7 +7,7 @@
 
 ## :clipboard: - Diagrama:
 
-![dscommerce drawio](https://github.com/carloshenriquefs/dscommerce-java/assets/54969405/c4e5ab38-c536-49f1-a27e-80fb4d14f6e4)
+![dscommerce drawio](https://github.com/carloshenriquefs/dscommerce-java/assets/54969405/bec2b868-5997-4668-957a-8d621f48c715)
 
 ##
 
