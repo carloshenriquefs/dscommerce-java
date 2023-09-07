@@ -1,4 +1,4 @@
-# Desafio: Projeto Spring Boot estruturado
+# :construction: - Desafio: Projeto Spring Boot estruturado
 
 - Projeto DSCommerce estruturado e com todas as funcionalidades implementadas;
 - Projeto implementado com Java e Spring Boot, usando banco de dados H2;
@@ -13,20 +13,20 @@
 
 ## :gear: - Endpoints:
 
-* Category:
+* :label: - Category:
 
     ```GET``` - findAll <br /> 
 
 ##
 
-* Order:
+* :bellhop_bell: - Order:
 
     ```GET``` - /{id} - findById <br />
     ```POST``` - insert <br />
 
 ##
 
-* Product:
+* :package: - Product:
 
     ```GET``` - /{id} - findById <br />
     ```GET``` - findAll <br /> 
@@ -36,13 +36,15 @@
 
 ##
 
-* User: 
+* :bust_in_silhouette: - User: 
 
     ```GET``` - /me - getME
 
 ##
 
 ### :white_check_mark: - Critérios:
+
+##
 
 - [x] - Endpoints públicos GET /produts e GET /products/{id} funcionam sem necessidade de login;
 - [x] - Endpoint de login funcionando e retornando o token de acesso;
