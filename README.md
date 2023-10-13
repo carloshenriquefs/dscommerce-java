@@ -5,6 +5,13 @@
 
 ##
 
+## :desktop_computer: - Layout:
+
+![image](https://github.com/carloshenriquefs/dscommerce-java/assets/54969405/cb6bada3-b6f3-4950-a27c-fdfe808824d7)
+![image](https://github.com/carloshenriquefs/dscommerce-java/assets/54969405/3a4cd519-b95f-40f4-b751-720b891fac38)
+
+##
+
 ## :clipboard: - Diagrama:
 
 ![dscommerce drawio](https://github.com/carloshenriquefs/dscommerce-java/assets/54969405/bec2b868-5997-4668-957a-8d621f48c715)
