@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -36,23 +35,25 @@ public class ProductServiceTest {
 
     private long existingProductId, nonExistingProductId;
     private Product product;
-
+    private ProductDTO productDTO;
     private String productName;
     private PageImpl<Product> page;
 
     @BeforeEach
     void setUp() throws Exception {
         existingProductId = 1L;
-        nonExistingProductId = 2l;
+        nonExistingProductId = 2L;
 
         productName = "PC Gamer";
 
-        product = ProductFactory.createProduct();
+        product = ProductFactory.createProduct(productName);
+
+        productDTO = new ProductDTO(product);
         page = new PageImpl<>(List.of(product));
 
         when(repository.findById(existingProductId)).thenReturn(Optional.of(product));
         when(repository.findById(nonExistingProductId)).thenReturn(Optional.empty());
-
+        when(repository.save(any())).thenReturn(product);
 
         when(repository.searchByName(any(), (Pageable) any())).thenReturn(page);
         //doThrow(ResourceNotFoundException.class).when(repository).findById(nonExistingProductId);
@@ -84,5 +85,14 @@ public class ProductServiceTest {
         Assertions.assertNotNull(result);
         Assertions.assertEquals(result.getSize(), 1);
         Assertions.assertEquals(result.iterator().next().getName(), productName);
+    }
+
+    @Test
+    public void insertShouldReturnProductDTO() {
+
+        ProductDTO result = service.insert(productDTO);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getId(), product.getId());
     }
 }
