@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.tests;
 
 import com.devsuperior.dscommerce.dto.ProductDTO;
+import com.devsuperior.dscommerce.dto.ProductMinDTO;
 import com.devsuperior.dscommerce.entities.Product;
 import com.devsuperior.dscommerce.repositories.ProductRepository;
 import com.devsuperior.dscommerce.services.ProductService;
@@ -11,10 +12,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
@@ -29,17 +36,25 @@ public class ProductServiceTest {
 
     private long existingProductId, nonExistingProductId;
     private Product product;
-    private Product productIdNotExist;
+
+    private String productName;
+    private PageImpl<Product> page;
 
     @BeforeEach
     void setUp() throws Exception {
         existingProductId = 1L;
         nonExistingProductId = 2l;
 
+        productName = "PC Gamer";
+
         product = ProductFactory.createProduct();
+        page = new PageImpl<>(List.of(product));
+
         when(repository.findById(existingProductId)).thenReturn(Optional.of(product));
         when(repository.findById(nonExistingProductId)).thenReturn(Optional.empty());
 
+
+        when(repository.searchByName(any(), (Pageable) any())).thenReturn(page);
         //doThrow(ResourceNotFoundException.class).when(repository).findById(nonExistingProductId);
     }
 
@@ -57,5 +72,17 @@ public class ProductServiceTest {
     public void findByIdShouldReturnResourceNotFoundExceptionWhenIdDoesNotExist() {
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> service.findById(nonExistingProductId));
+    }
+
+    @Test
+    public void findAllShouldReturnPagedProductMinDTO() {
+
+        Pageable pageable = PageRequest.of(0, 12);
+
+        Page<ProductMinDTO> result = service.findAll(productName, pageable);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getSize(), 1);
+        Assertions.assertEquals(result.iterator().next().getName(), productName);
     }
 }
