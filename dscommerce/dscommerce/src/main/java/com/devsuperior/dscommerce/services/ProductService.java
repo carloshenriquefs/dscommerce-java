@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.devsuperior.dscommerce.constants.Constants.FALHA_INTEGRIDADE_REFERENCIAL;
 import static com.devsuperior.dscommerce.constants.Constants.RECURSO_NAO_ENCONTRADO;
 
 @Service
@@ -55,19 +56,19 @@ public class ProductService {
             entity = productRepository.save(entity);
             return new ProductDTO(entity);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Recurso não encontrado");
+            throw new ResourceNotFoundException(RECURSO_NAO_ENCONTRADO);
         }
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         if (!productRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Recurso não encontrado");
+            throw new ResourceNotFoundException(RECURSO_NAO_ENCONTRADO);
         }
         try {
             productRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
+            throw new DatabaseException(FALHA_INTEGRIDADE_REFERENCIAL);
         }
     }
 
