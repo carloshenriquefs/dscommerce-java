@@ -1,8 +1,9 @@
-package com.devsuperior.dscommerce.tests;
+package com.devsuperior.dscommerce.tests.services;
 
 import com.devsuperior.dscommerce.dto.ProductDTO;
 import com.devsuperior.dscommerce.dto.ProductMinDTO;
 import com.devsuperior.dscommerce.entities.Product;
+import com.devsuperior.dscommerce.tests.factory.ProductFactory;
 import com.devsuperior.dscommerce.repositories.ProductRepository;
 import com.devsuperior.dscommerce.services.ProductService;
 import com.devsuperior.dscommerce.services.exceptions.DatabaseException;
@@ -28,7 +29,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-public class ProductServiceTest {
+public class ProductServiceTests {
 
     @InjectMocks
     private ProductService service;
