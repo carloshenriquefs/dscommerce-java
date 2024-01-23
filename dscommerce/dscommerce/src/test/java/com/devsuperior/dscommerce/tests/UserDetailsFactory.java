@@ -1,4 +1,4 @@
-package com.devsuperior.dscommerce.tests.factory;
+package com.devsuperior.dscommerce.tests;
 
 import com.devsuperior.dscommerce.projections.UserDetailsProjection;
 

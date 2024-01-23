@@ -1,10 +1,9 @@
-package com.devsuperior.dscommerce.tests.services;
+package com.devsuperior.dscommerce.services;
 
 import com.devsuperior.dscommerce.dto.CategoryDTO;
 import com.devsuperior.dscommerce.entities.Category;
 import com.devsuperior.dscommerce.repositories.CategoryRepository;
-import com.devsuperior.dscommerce.tests.factory.CategoryFactory;
-import com.devsuperior.dscommerce.services.CategoryService;
+import com.devsuperior.dscommerce.tests.CategoryFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
