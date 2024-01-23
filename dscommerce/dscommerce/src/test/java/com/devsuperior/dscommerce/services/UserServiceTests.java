@@ -1,5 +1,6 @@
 package com.devsuperior.dscommerce.services;
 
+import com.devsuperior.dscommerce.dto.UserDTO;
 import com.devsuperior.dscommerce.entities.User;
 import com.devsuperior.dscommerce.projections.UserDetailsProjection;
 import com.devsuperior.dscommerce.repositories.UserRepository;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -21,8 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class UserServiceTests {
@@ -95,5 +96,29 @@ public class UserServiceTests {
         assertThrows(UsernameNotFoundException.class, () -> {
             userService.authenticated();
         });
+    }
+
+    @Test
+    public void getMetShouldReturnUserDTOWhenUserAuthenticated() {
+
+        UserService spyUserService = Mockito.spy(userService);
+        doReturn(user).when(spyUserService).authenticated();
+
+        UserDTO result = spyUserService.getMe();
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getEmail(), existingUsername);
+    }
+
+    @Test
+    public void getMetShouldThrowUsernameNotFoundExceptionWhenUserNotAuthenticated() {
+
+        UserService spyUserService = Mockito.spy(userService);
+        doThrow(UsernameNotFoundException.class).when(spyUserService).authenticated();
+
+        assertThrows(UsernameNotFoundException.class, () -> {
+            UserDTO result = spyUserService.getMe();
+        });
+
     }
 }
