@@ -4,7 +4,6 @@ import com.devsuperior.dscommerce.dto.CategoryDTO;
 import com.devsuperior.dscommerce.entities.Category;
 import com.devsuperior.dscommerce.repositories.CategoryRepository;
 import com.devsuperior.dscommerce.tests.CategoryFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -44,9 +44,8 @@ public class CategoryServiceTests {
 
         List<CategoryDTO> result = service.findAll();
 
-        Assertions.assertEquals(result.size(), 1);
-        Assertions.assertEquals(result.get(0).getId(), category.getId());
-        Assertions.assertEquals(result.get(0).getName(), category.getName());
+        assertEquals(result.size(), 1);
+        assertEquals(result.get(0).getId(), category.getId());
+        assertEquals(result.get(0).getName(), category.getName());
     }
-
 }

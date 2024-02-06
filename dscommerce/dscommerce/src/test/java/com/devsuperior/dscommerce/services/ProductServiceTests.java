@@ -146,5 +146,4 @@ public class ProductServiceTests {
 
         assertThrows(DatabaseException.class, () -> service.delete(dependentProductId));
     }
-
 }

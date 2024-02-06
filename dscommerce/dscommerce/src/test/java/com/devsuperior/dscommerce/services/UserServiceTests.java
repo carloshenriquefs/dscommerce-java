@@ -7,7 +7,6 @@ import com.devsuperior.dscommerce.repositories.UserRepository;
 import com.devsuperior.dscommerce.tests.UserDetailsFactory;
 import com.devsuperior.dscommerce.tests.UserFactory;
 import com.devsuperior.dscommerce.util.CustomUserUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -67,8 +66,8 @@ public class UserServiceTests {
 
         UserDetails result = userService.loadUserByUsername(existingUsername);
 
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(result.getUsername(), existingUsername);
+        assertNotNull(result);
+        assertEquals(result.getUsername(), existingUsername);
     }
 
     @Test
@@ -84,8 +83,8 @@ public class UserServiceTests {
 
         User result = userService.authenticated();
 
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(result.getUsername(), existingUsername);
+        assertNotNull(result);
+        assertEquals(result.getUsername(), existingUsername);
     }
 
     @Test
@@ -106,8 +105,8 @@ public class UserServiceTests {
 
         UserDTO result = spyUserService.getMe();
 
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(result.getEmail(), existingUsername);
+        assertNotNull(result);
+        assertEquals(result.getEmail(), existingUsername);
     }
 
     @Test
@@ -119,6 +118,5 @@ public class UserServiceTests {
         assertThrows(UsernameNotFoundException.class, () -> {
             UserDTO result = spyUserService.getMe();
         });
-
     }
 }

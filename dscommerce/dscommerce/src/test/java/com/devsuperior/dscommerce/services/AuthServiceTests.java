@@ -3,14 +3,16 @@ package com.devsuperior.dscommerce.services;
 import com.devsuperior.dscommerce.entities.User;
 import com.devsuperior.dscommerce.services.exceptions.ForbiddenException;
 import com.devsuperior.dscommerce.tests.UserFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class AuthServiceTests {
@@ -33,11 +35,11 @@ public class AuthServiceTests {
     @Test
     public void validateSelfOrAdminShouldDoNothingWhenAdminLogged() {
 
-        Mockito.when(userService.authenticated()).thenReturn(admin);
+        when(userService.authenticated()).thenReturn(admin);
 
         Long userId = admin.getId();
 
-        Assertions.assertDoesNotThrow(() -> {
+        assertDoesNotThrow(() -> {
             service.validateSelfOrAdmin(userId);
         });
     }
@@ -45,11 +47,11 @@ public class AuthServiceTests {
     @Test
     public void validateSelfOrAdminShouldDoNothingWhenSelfLogged() {
 
-        Mockito.when(userService.authenticated()).thenReturn(selfClient);
+        when(userService.authenticated()).thenReturn(selfClient);
 
         Long userId = selfClient.getId();
 
-        Assertions.assertDoesNotThrow(() -> {
+        assertDoesNotThrow(() -> {
             service.validateSelfOrAdmin(userId);
         });
     }
@@ -57,11 +59,11 @@ public class AuthServiceTests {
     @Test
     public void validateSelfOrAdminThrowsForbiddenExceptionWhenClientOtherLogged() {
 
-        Mockito.when(userService.authenticated()).thenReturn(selfClient);
+        when(userService.authenticated()).thenReturn(selfClient);
 
         Long userId = otherClient.getId();
 
-        Assertions.assertThrows(ForbiddenException.class, () -> {
+        assertThrows(ForbiddenException.class, () -> {
             service.validateSelfOrAdmin(userId);
         });
     }
