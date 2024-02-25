@@ -38,7 +38,7 @@ public class ProductDTO {
     public ProductDTO(Product entity) {
         id = entity.getId();
         name = entity.getName();
-        description = entity.getName();
+        description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
         categories = entity.getCategories().stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
